@@ -1,16 +1,12 @@
 import { ChangeEventHandler, useState } from 'react';
 
-type Props = {
-  anyProp?: any;
-};
-
 type Todo = {
   id: number;
   name: string;
   isCompleted: boolean;
 };
 
-export const useTodos = (props: Props) => {
+export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [error, setError] = useState('');
   const [newTodoName, setNewTodoName] = useState('');
@@ -19,11 +15,7 @@ export const useTodos = (props: Props) => {
     setNewTodoName(value);
   };
 
-  console.log({ todosuse: todos });
-
   const handleAddTodo = () => {
-    console.log('added');
-
     if (!newTodoName.trim()) {
       setError('too empty =(');
       return;

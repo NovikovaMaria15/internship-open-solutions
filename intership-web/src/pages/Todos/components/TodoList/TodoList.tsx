@@ -20,9 +20,6 @@ export const TodoList: React.FC<Props> = ({ todos, handleToggleCompleteStatus })
     [todos, listStatus],
   );
 
-  console.log({ todos });
-  console.log({ filteredTodos });
-
   return (
     <div>
       <div>
