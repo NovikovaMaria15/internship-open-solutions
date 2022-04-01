@@ -1,0 +1,78 @@
+.photo {
+  width: 90px;
+  height: 87px;
+  min-height: 87px;
+}
+
+.background {
+  background: rgb(209, 227, 233);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.login {
+  padding-top: 13.1px;
+}
+
+.input {
+  border: none;
+  width: 299px;
+  height: 45px;
+  min-height: 45px;
+  padding-left: 10px;
+  :focus {
+    outline: 0;
+    outline-offset: 0;
+  }
+}
+
+.offsetFromInput {
+  padding-bottom: 15px;
+}
+
+.remember {
+  width: 20px;
+  height: 20px;
+  min-height: 20px;
+}
+
+.indent {
+  padding-left: 10px;
+}
+
+.alignment {
+  display: flex;
+  flex-direction: row;
+  padding-top: 15px;
+  padding-bottom: 14px;
+}
+
+.button {
+  width: 380px;
+  height: 48px;
+  min-height: 48px;
+  border-radius: 5px;
+  background-color: #0085f9;
+  color: #ffffff;
+  font-weight: bold;
+  border: none;
+  &:hover {
+    background: rgb(53, 167, 110);
+  }
+  cursor: pointer;
+}
+
+.year {
+  padding-top: 60px;
+  color: #6a757c;
+}
+
+.error {
+  padding-top: 5px;
+  color: #6a757c;
+}

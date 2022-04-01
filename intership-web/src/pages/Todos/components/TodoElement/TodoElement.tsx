@@ -10,7 +10,7 @@ export const TodoElement: React.FC<Props> = ({ name, isCompleted, toggleStatus }
   return (
     <div>
       <div>{name}</div>
-      <input type="checkbox" checked={isCompleted} onClick={toggleStatus} />
+      <input type="checkbox" checked={isCompleted} defaultChecked={false} onClick={toggleStatus} />
     </div>
   );
 };

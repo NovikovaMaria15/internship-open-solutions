@@ -1,5 +1,4 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import s from './styles.module.scss';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   someProp?: any;

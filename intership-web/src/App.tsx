@@ -1,20 +1,32 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from './store/store';
 
-import { HomePage, CounterPage, TodosPage } from 'Common/Pages';
-import { Navigation } from 'Common/Components/Navigation';
+import RequireAuth from './components/routes/RequireAuth';
+import PrivateRoutes from './components/routes/PrivateRoutes';
+
+import { Login } from './pages/Login/Login';
 
 import s from './App.module.scss';
 
 export const App: React.FC = () => {
+  const isLoaded = useSelector((state: RootState) => state.authorization.isLogin);
   return (
     <div className={s.app}>
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/counter" element={<CounterPage />} />
-        <Route path="/todos" element={<TodosPage />} />
-      </Routes>
+      <Router>
+        <Routes>
+          <Route
+            path="*"
+            element={
+              <RequireAuth isLogged={isLoaded}>
+                <PrivateRoutes />
+              </RequireAuth>
+            }
+          />
+          <Route path="/" element={<Login />} />
+        </Routes>
+      </Router>
     </div>
   );
 };

@@ -6,11 +6,7 @@ import { useTodos } from './hooks/useTodos';
 
 import s from './styles.module.scss';
 
-type Props = {
-  someProp?: any;
-};
-
-export const TodosPage: React.FC<Props> = ({ someProp }) => {
+export const TodosPage: React.FC = () => {
   const {
     handleAddTodo,
     handleChangeNewTodoName,
@@ -18,7 +14,7 @@ export const TodosPage: React.FC<Props> = ({ someProp }) => {
     error,
     newTodoName,
     todos,
-  } = useTodos({});
+  } = useTodos();
 
   return (
     <div className={s.container}>
