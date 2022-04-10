@@ -52,7 +52,7 @@ export const Controller = {
         });
         console.log(name);
         if (callback) {
-          res.json({ success: true });
+          res.json({ success: true, organization: callback[callback.length -1] });
         } else {
           res.json({ success: false });
         }

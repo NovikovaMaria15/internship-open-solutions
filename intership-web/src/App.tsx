@@ -12,6 +12,7 @@ import s from './App.module.scss';
 
 export const App: React.FC = () => {
   const isLoaded = useSelector((state: RootState) => state.authorization.isLogin);
+
   return (
     <div className={s.app}>
       <Router>
