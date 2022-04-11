@@ -5,7 +5,6 @@
   height: 54px;
   display: flex;
   align-items: center;
-  justify-content: right;
 }
 
 .logout {
@@ -65,4 +64,73 @@
   align-items: center;
   margin-top: 8px;
   margin-bottom: 8px;
+}
+
+.titleHeader {
+  font-weight: bold;
+}
+
+.line {
+  border-bottom: 1px solid #c4c4c4;
+  width: 1110px;
+  margin-left: 405px;
+  height: 2px;
+}
+
+.photo {
+  width: 33px;
+  height: 32px;
+  min-height: 32px;
+}
+
+.photoHeader {
+  padding-left: 14px;
+  padding-right: 394px;
+}
+
+.division {
+  color: white;
+  padding-left: 388px;
+  padding-right: 386px;
+}
+
+.employee {
+  color: white;
+  padding-right: 388px;
+}
+
+.userData {
+  display: flex;
+  padding-bottom: 20px;
+  padding-left: 425px;
+  flex-direction: row;
+  flex: 1 1 auto;
+}
+
+.line {
+  border-bottom: 1px solid #c4c4c4;
+  width: 1110px;
+  margin-left: 405px;
+  height: 2px;
+}
+
+.icons {
+  font-size: 20px;
+  color: #0085f9;
+  gap: 5px;
+  cursor: pointer;
+  padding-top: 13px;
+}
+
+.column {
+  width: 13%;
+  padding-top: 13px;
+}
+
+.shellModul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 200px;
 }
