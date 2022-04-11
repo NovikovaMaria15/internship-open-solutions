@@ -6,21 +6,27 @@
   "organization": [
     {
       "id": 1,
-      "name": "namefasd",
-      "address": "asdfasdf",
-      "INN": 1234356789
+      "name": "121",
+      "address": "112",
+      "INN": "212"
     },
     {
       "id": 2,
-      "name": "Jagsd",
-      "address": "2-asdga",
-      "INN": "2345678904"
+      "name": "Jagsd11",
+      "address": "2-asdga11",
+      "INN": "234567890411"
     },
     {
       "id": 3,
-      "name": "234",
-      "address": "t234t",
-      "INN": 1234356789
+      "name": "1233123",
+      "address": "123",
+      "INN": "125555"
+    },
+    {
+      "id": 4,
+      "name": "5550",
+      "address": "5550",
+      "INN": "5550"
     }
   ],
   "division": [

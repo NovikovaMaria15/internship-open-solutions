@@ -2,65 +2,70 @@ import React, { useState, useCallback, ChangeEventHandler, ChangeEvent } from 'r
 import ReactDOM from 'react-dom';
 import s from './Modal.module.scss';
 
-export function Modal({
+export function ModalEmloyee({
   onClose,
   onSubmit,
-  name,
+  FIO,
   address,
-  INN,
+  position,
 }: {
   onClose: () => void;
   onSubmit: (params) => void;
-  name?: string;
+  FIO?: string;
   address?: string;
-  INN?: string | number;
+  position?: string;
 }) {
-  const [nameValue, setName] = useState(name || '');
+  const [FIOValue, setFIO] = useState(FIO || '');
   const [addressValue, setAddress] = useState(address || '');
-  const [INNValue, setINN] = useState(INN || '');
+  const [positionValue, setPosition] = useState(position || '');
 
-  const handleChangeName: ChangeEventHandler<HTMLInputElement> = useCallback(
+  const handleChangeFIO: ChangeEventHandler<HTMLInputElement> = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      setName(event.target.value);
+      setFIO(event.target.value);
     },
     [],
   );
 
-  const handleChangAddress: ChangeEventHandler<HTMLInputElement> = useCallback(
+  const handleChangeAddress: ChangeEventHandler<HTMLInputElement> = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       setAddress(event.target.value);
     },
     [],
   );
 
-  const handleChangeINN: ChangeEventHandler<HTMLInputElement> = useCallback(
+  const handleChangePosition: ChangeEventHandler<HTMLInputElement> = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      setINN(event.target.value);
+      setPosition(event.target.value);
     },
     [],
   );
 
   const formSubmit: () => void = useCallback(() => {
-    onSubmit({ name: nameValue, address: addressValue, INN: INNValue });
-  }, [onSubmit, nameValue, INNValue, addressValue]);
+    onSubmit({ FIO: FIOValue, address: addressValue, position: positionValue });
+  }, [onSubmit, FIOValue, addressValue, positionValue]);
 
   return ReactDOM.createPortal(
     <div className={s.modal}>
       <div className={s.shellModul}>
-        <h3 className={s.paddingLeft}>Add Organization</h3>
+        <h3 className={s.paddingLeft}>Add Employee</h3>
         <div className={s.line} />
         <div className={s.paddingLeft}>
-          <div>Organization Name</div>
-          <input className={s.input} type="text" value={nameValue} onChange={handleChangeName} />
-          <div>Organization Address</div>
+          <div>Фамилия Имя Отчество</div>
+          <input className={s.input} type="text" value={FIOValue} onChange={handleChangeFIO} />
+          <div>Employee Address</div>
           <input
             className={s.input}
             type="text"
             value={addressValue}
-            onChange={handleChangAddress}
+            onChange={handleChangeAddress}
           />
-          <div>Organization`s INN</div>
-          <input className={s.input} type="text" value={INNValue} onChange={handleChangeINN} />
+          <div>Employees`s Position</div>
+          <input
+            className={s.input}
+            type="text"
+            value={positionValue}
+            onChange={handleChangePosition}
+          />
         </div>
         <div className={s.line} />
         <div className={s.сancelAndAdd}>
@@ -76,5 +81,3 @@ export function Modal({
     document.querySelector('#portal')!,
   );
 }
-
-export default Modal;

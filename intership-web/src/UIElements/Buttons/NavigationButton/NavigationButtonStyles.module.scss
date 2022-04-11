@@ -1,0 +1,19 @@
+.navigationButton {
+  color: white;
+  background-color: #0085f9;
+  border-radius: 5px;
+  font-size: 0.8em;
+  font-weight: 700;
+  box-shadow: 0 -3px rgb(53, 102, 167) inset;
+  height: 38px;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background: rgb(53, 167, 110);
+  }
+}

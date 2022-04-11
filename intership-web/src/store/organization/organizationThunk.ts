@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const getOrganizations = createAsyncThunk('organization/getOrganizations', async () => {
+export const getOrganization = createAsyncThunk('organization/getOrganizations', async () => {
   try {
     const response = await axios.get(`http://127.0.0.1:8080/organization`);
     return response.data;
@@ -10,7 +10,7 @@ export const getOrganizations = createAsyncThunk('organization/getOrganizations'
   }
 });
 
-export const addOrganizations = createAsyncThunk(
+export const addOrganization = createAsyncThunk(
   'organization/addOrganizations',
   async ({ name, address, INN }: any, { rejectWithValue }) => {
     try {

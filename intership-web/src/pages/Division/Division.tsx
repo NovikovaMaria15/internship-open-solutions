@@ -1,21 +1,23 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { IoArrowBackOutline, IoAddCircleSharp } from 'react-icons/io5';
-import { Organization } from 'Src/models/type';
-import { NavigationButton } from 'Src/UIElements/Buttons/NavigationButton/NavigationButton';
+import { Division } from 'Src/models/type';
 import { useAppDispatch, RootState } from '../../store/store';
-import { getOrganization, addOrganization } from '../../store/organization/organizationThunk';
-import { OrganizationItems } from './OrganizationItems';
-import { ModalOrganization } from '../Modal/ModalOrganization';
+import { getDivision, addDivision } from '../../store/division/divisionThunk';
+import { DivisionItems } from './DivisionItems';
+import { ModalDivision } from '../Modal/ModalDivision';
+import { NavigationButton } from '../../UIElements/Buttons/index';
 
-import s from './OrganizationStyles.module.scss';
+import s from './DivisionStyles.module.scss';
 
-export function Organization() {
+export function Division() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const organizations = useSelector((state: RootState) => state.organization.data);
+  const division = useSelector((state: RootState) => state.division.data);
   const [open, setOpen] = useState(false);
+  const params = useParams();
+  const organizationId = params.id;
 
   const back = useCallback(() => {
     navigate(-1);
@@ -31,12 +33,19 @@ export function Organization() {
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    dispatch(getOrganization());
-  }, [dispatch]);
+    dispatch(getDivision({ organizationId }));
+  }, [dispatch, organizationId]);
 
-  const addOrganizations: ({ name, address, INN }) => void = useCallback(
-    ({ name, address, INN }) => {
-      dispatch(addOrganization({ name, address, INN }))
+  const addDivisions: ({ id_organization, name, phone }) => void = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    (params) => {
+      dispatch(
+        addDivision({
+          id_organization: organizationId,
+          name: params.name,
+          phone: params.phone,
+        }),
+      )
         .then((action) => {
           if (action.payload) {
             modalClose();
@@ -48,7 +57,7 @@ export function Organization() {
           console.log('Неверные данные');
         });
     },
-    [dispatch, modalClose],
+    [dispatch, modalClose, organizationId],
   );
 
   return (
@@ -58,28 +67,28 @@ export function Organization() {
           <IoArrowBackOutline /> Back
         </NavigationButton>
         <NavigationButton onClick={modalOpen}>
-          <IoAddCircleSharp /> Add Organization
+          <IoAddCircleSharp /> Add Division
         </NavigationButton>
       </div>
       <div className={s.table}>
         <div className={`${s.header} ${s.row}`}>
           <div className={s.column}>id</div>
+          <div className={s.column}>id_organization</div>
           <div className={s.column}>name</div>
-          <div className={s.column}>address</div>
-          <div className={s.column}>INN</div>
+          <div className={s.column}>phone</div>
           <div className={s.column}>Actions</div>
         </div>
-        {organizations.map((data: Organization) => (
-          <OrganizationItems
+        {division.map((data: Division) => (
+          <DivisionItems
             key={data.id}
             id={data.id}
             name={data.name}
-            address={data.address}
-            INN={data.INN}
+            id_organization={data.id_organization}
+            phone={data.phone}
           />
         ))}
       </div>
-      {open && <ModalOrganization onSubmit={addOrganizations} onClose={modalClose} />}
+      {open && <ModalDivision onSubmit={addDivisions} onClose={modalClose} />}
     </>
   );
 }
