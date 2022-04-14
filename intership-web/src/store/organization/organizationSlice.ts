@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Organization } from 'src/models/organzation';
+import { Organization } from 'Src/models/type';
 import {
-  getOrganizations,
-  addOrganizations,
+  getOrganization,
+  addOrganization,
   deleteOrganization,
   editOrganizations,
 } from './organizationThunk';
@@ -16,12 +16,12 @@ const organizationSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [getOrganizations.fulfilled.toString()]: (state, action) => {
+    [getOrganization.fulfilled.toString()]: (state, action) => {
       // eslint-disable-next-line no-param-reassign
       state.data = action.payload;
     },
 
-    [addOrganizations.fulfilled.toString()]: (state, action) => {
+    [addOrganization.fulfilled.toString()]: (state, action) => {
       if (action.payload.success) {
         state.data.push(<Organization>action.payload.organization);
       }
@@ -30,7 +30,7 @@ const organizationSlice = createSlice({
     [deleteOrganization.fulfilled.toString()]: (state, action) => {
       if (action.payload.response.success) {
         const index = state.data.findIndex(
-          (organization: any) => organization.id === action.payload.organizationId,
+          (organization: Organization) => organization.id === action.payload.organizationId,
         );
         if (index !== -1) state.data.splice(index, 1);
       }
@@ -39,7 +39,7 @@ const organizationSlice = createSlice({
     [editOrganizations.fulfilled.toString()]: (state, action) => {
       if (action.payload.response.success) {
         const index = state.data.findIndex(
-          (organization: any) => organization.id === action.payload.organizationId,
+          (organization: Organization) => organization.id === action.payload.organizationId,
         );
         if (index !== -1) {
           // eslint-disable-next-line no-param-reassign

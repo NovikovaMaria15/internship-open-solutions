@@ -1,15 +1,17 @@
 import React, { useState, useCallback } from 'react';
 import { IoArrowForwardOutline, IoPencilSharp, IoTrash } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 import { deleteOrganization, editOrganizations } from 'Src/store/organization/organizationThunk';
-import { Organization } from 'src/models/organzation';
+import { Organization } from 'Src/models/type';
 import { useAppDispatch } from '../../store/store';
-import { Modal } from '../Modal/Modal';
+import { ModalOrganization } from '../Modal/ModalOrganization';
 
 import s from './OrganizationStyles.module.scss';
 
 export const OrganizationItems = ({ id, name, address, INN }: Organization) => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const deleteOrganizations: () => void = useCallback(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -23,6 +25,10 @@ export const OrganizationItems = ({ id, name, address, INN }: Organization) => {
   const modalClose = useCallback(() => {
     setOpen(false);
   }, []);
+
+  const division = useCallback(() => {
+    navigate(`/division/${id}`);
+  }, [navigate, id]);
 
   const editOrganization: (params) => void = useCallback(
     (params) => {
@@ -49,21 +55,20 @@ export const OrganizationItems = ({ id, name, address, INN }: Organization) => {
   );
 
   return (
-    <div>
-      <div className={s.userData}>
+    <>
+      <div className={s.row}>
         <div className={s.column}> {id}</div>
         <div className={s.column}> {name}</div>
         <div className={s.column}> {address}</div>
         <div className={s.column}> {INN}</div>
-        <div className={s.icons}>
-          <IoArrowForwardOutline />
+        <div className={`${s.column} ${s.icons}`}>
+          <IoArrowForwardOutline onClick={division} />
           <IoPencilSharp onClick={modalOpen} />
           <IoTrash onClick={deleteOrganizations} />
         </div>
       </div>
-      <div className={s.line} />
       {open && (
-        <Modal
+        <ModalOrganization
           onSubmit={editOrganization}
           name={name}
           address={address}
@@ -71,7 +76,7 @@ export const OrganizationItems = ({ id, name, address, INN }: Organization) => {
           onClose={modalClose}
         />
       )}
-    </div>
+    </>
   );
 };
 
