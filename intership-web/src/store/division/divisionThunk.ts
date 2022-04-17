@@ -1,9 +1,22 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+type CreateDivisionParams = {
+  organizationId?: string;
+  name: string;
+  phone: number;
+};
+
+type EditDivisionParams = {
+  organizationId?: string;
+  name: string;
+  phone: number;
+  divisionId: number;
+};
+
 export const getDivision = createAsyncThunk(
   'division/getDivision',
-  async ({ organizationId }: any, { rejectWithValue }) => {
+  async ({ organizationId }: { organizationId?: string }, { rejectWithValue }) => {
     try {
       const response = await axios.get(`http://127.0.0.1:8080/division/?id=${organizationId}`);
       return { organizationId, response: response.data };
@@ -15,16 +28,14 @@ export const getDivision = createAsyncThunk(
 
 export const addDivision = createAsyncThunk(
   'division/addDivision',
-  // eslint-disable-next-line camelcase
-  async ({ id_organization, name, phone, divisionId }: any, { rejectWithValue }) => {
+  async ({ organizationId, name, phone }: CreateDivisionParams, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`http://127.0.0.1:8080/division/?id=${divisionId}`, {
-        // eslint-disable-next-line camelcase
-        id_organization,
+      const response = await axios.post('http://127.0.0.1:8080/division', {
+        id_organization: organizationId,
         name,
         phone,
       });
-      return { divisionId, response: response.data };
+      return { response: response.data };
     } catch {
       return rejectWithValue(null);
     }
@@ -33,7 +44,7 @@ export const addDivision = createAsyncThunk(
 
 export const deleteDivision = createAsyncThunk(
   'division/deleteDivision',
-  async ({ divisionId }: any, { rejectWithValue }) => {
+  async ({ divisionId }: { divisionId: number }, { rejectWithValue }) => {
     try {
       const response = await axios.delete(`http://127.0.0.1:8080/division/?id=${divisionId}`);
       return { divisionId, response: response.data };
@@ -45,17 +56,14 @@ export const deleteDivision = createAsyncThunk(
 
 export const editDivision = createAsyncThunk(
   'diviion/editDivision',
-  // eslint-disable-next-line camelcase
-  async ({ name, id_organization, phone, divisionId }: any, { rejectWithValue }) => {
+  async ({ name, organizationId, phone, divisionId }: EditDivisionParams, { rejectWithValue }) => {
     try {
       const response = await axios.put(`http://127.0.0.1:8080/division/?id=${divisionId}`, {
-        // eslint-disable-next-line camelcase
-        id_organization,
+        id_organization: organizationId,
         name,
         phone,
       });
-      // eslint-disable-next-line camelcase
-      return { divisionId, id_organization, name, phone, response: response.data };
+      return { divisionId, organizationId, name, phone, response: response.data };
     } catch {
       return rejectWithValue(null);
     }

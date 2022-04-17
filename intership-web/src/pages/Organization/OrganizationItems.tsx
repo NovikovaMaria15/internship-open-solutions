@@ -4,19 +4,29 @@ import { useNavigate } from 'react-router-dom';
 import { deleteOrganization, editOrganizations } from 'Src/store/organization/organizationThunk';
 import { Organization } from 'Src/models/type';
 import { useAppDispatch } from '../../store/store';
-import { ModalOrganization } from '../Modal/ModalOrganization';
+import { ModalOrganization } from '../../components/Modal/ModalOrganization';
+import { ModalConfirmation } from '../../components/Modal/ModalConfirmation';
 
 import s from './OrganizationStyles.module.scss';
 
-export const OrganizationItems = ({ id, name, address, INN }: Organization) => {
+export const OrganizationItems: React.FC<Organization> = ({ id, name, address, INN }) => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
+  const [confirmation, setConfirmation] = useState(false);
   const navigate = useNavigate();
 
   const deleteOrganizations: () => void = useCallback(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     dispatch(deleteOrganization({ organizationId: id }));
   }, [dispatch, id]);
+
+  const confirmationOpen = useCallback(() => {
+    setConfirmation(true);
+  }, []);
+
+  const confirmationClose = useCallback(() => {
+    setConfirmation(false);
+  }, []);
 
   const modalOpen = useCallback(() => {
     setOpen(true);
@@ -32,6 +42,7 @@ export const OrganizationItems = ({ id, name, address, INN }: Organization) => {
 
   const editOrganization: (params) => void = useCallback(
     (params) => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       dispatch(
         editOrganizations({
           organizationId: id,
@@ -39,17 +50,11 @@ export const OrganizationItems = ({ id, name, address, INN }: Organization) => {
           address: params.address,
           INN: params.INN,
         }),
-      )
-        .then((action) => {
-          if (action.payload) {
-            modalClose();
-          } else {
-            console.log('Неверные данные');
-          }
-        })
-        .catch(() => {
-          console.log('Неверные данные');
-        });
+      ).then((action) => {
+        if (action.payload) {
+          modalClose();
+        }
+      });
     },
     [dispatch, modalClose, id],
   );
@@ -64,9 +69,12 @@ export const OrganizationItems = ({ id, name, address, INN }: Organization) => {
         <div className={`${s.column} ${s.icons}`}>
           <IoArrowForwardOutline onClick={division} />
           <IoPencilSharp onClick={modalOpen} />
-          <IoTrash onClick={deleteOrganizations} />
+          <IoTrash onClick={confirmationOpen} />
         </div>
       </div>
+      {confirmation && (
+        <ModalConfirmation onSubmit={deleteOrganizations} confirmationClose={confirmationClose} />
+      )}
       {open && (
         <ModalOrganization
           onSubmit={editOrganization}

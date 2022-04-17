@@ -1,12 +1,4 @@
-export { HomePage } from './Home';
-export { CounterPage } from './Counter';
-export { TodosPage } from './Todos';
 export { Organization } from './Organization/Organization';
 export { Login } from './Login/Login';
-export { OrganizationItems } from './Organization/OrganizationItems';
-export { ModalOrganization } from './Modal/ModalOrganization';
-export { ModalDivision } from './Modal/ModalDivision';
 export { Division } from './Division/Division';
-export { DivisionItems } from './Division/DivisionItems';
 export { Employee } from './Employee/Employee';
-export { EmployeeItems } from './Employee/EmployeeItems';

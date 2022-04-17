@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { HomePage, CounterPage, TodosPage, Organization, Division, Employee } from 'Common/Pages';
+import { Organization, Division, Employee } from 'Common/Pages';
 import { Header } from '../../UIElements/Header/Header';
 
 export default function PrivateRoutes() {

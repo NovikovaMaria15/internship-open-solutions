@@ -8,11 +8,11 @@
 
 .header {
   font-weight: bold;
-  border-top: 1px solid #c4c4c4;
+  border-top: 1px solid var(--color-grayWhite);
 }
 
 .row {
-  border-bottom: 1px solid #c4c4c4;
+  border-bottom: 1px solid var(--color-grayWhite);
   justify-content: space-around;
   flex-direction: row;
   display: flex;
@@ -28,7 +28,7 @@
 
 .icons {
   font-size: 20px;
-  color: #0085f9;
+  color: var(--color-blue);
   gap: 5px;
   cursor: pointer;
 }
