@@ -19,7 +19,6 @@ const authorizationSlice = createSlice({
   },
   extraReducers: {
     [authorize.fulfilled.toString()]: (state, action) => {
-      console.log('action', action);
       // eslint-disable-next-line no-param-reassign
       state.isLogin = action.payload;
       localStorage.setItem('isLoggedIn', JSON.stringify(state.isLogin));
@@ -30,7 +29,6 @@ const authorizationSlice = createSlice({
     },
   },
 });
-console.log('000', authorizationSlice);
 
 export const { logout } = authorizationSlice.actions;
 

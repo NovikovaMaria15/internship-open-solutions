@@ -1,0 +1,14 @@
+.blueBatton {
+  width: 55px;
+  height: 38px;
+  min-height: 38px;
+  border-radius: 5px;
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  font-weight: bold;
+  border: none;
+  &:hover {
+    background: var(--color-lightGreen);
+  }
+  cursor: pointer;
+}

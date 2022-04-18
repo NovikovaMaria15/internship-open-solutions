@@ -1,27 +1,23 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { IoArrowBackOutline, IoAddCircleSharp } from 'react-icons/io5';
+import { useParams } from 'react-router-dom';
+import { IoAddCircleSharp } from 'react-icons/io5';
 import { Division } from 'Src/models/type';
 import { useAppDispatch, RootState } from '../../store/store';
 import { getDivision, addDivision } from '../../store/division/divisionThunk';
 import { DivisionItems } from './DivisionItems';
-import { ModalDivision } from '../Modal/ModalDivision';
+import { ModalDivision } from '../../components/Modal/ModalDivision';
 import { NavigationButton } from '../../UIElements/Buttons/index';
+import { BackButton } from '../../UIElements/Buttons/BackButton/BackButton';
 
 import s from './DivisionStyles.module.scss';
 
 export function Division() {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const division = useSelector((state: RootState) => state.division.data);
   const [open, setOpen] = useState(false);
-  const params = useParams();
-  const organizationId = params.id;
-
-  const back = useCallback(() => {
-    navigate(-1);
-  }, [navigate]);
+  const parameters = useParams();
+  const organizationId = parameters.id;
 
   const modalOpen = useCallback(() => {
     setOpen(true);
@@ -36,26 +32,20 @@ export function Division() {
     dispatch(getDivision({ organizationId }));
   }, [dispatch, organizationId]);
 
-  const addDivisions: ({ id_organization, name, phone }) => void = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-shadow
+  const addDivisions: ({ name, phone }) => void = useCallback(
     (params) => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       dispatch(
         addDivision({
-          id_organization: organizationId,
+          organizationId,
           name: params.name,
           phone: params.phone,
         }),
-      )
-        .then((action) => {
-          if (action.payload) {
-            modalClose();
-          } else {
-            console.log('Неверные данные');
-          }
-        })
-        .catch(() => {
-          console.log('Неверные данные');
-        });
+      ).then((action) => {
+        if (action.payload) {
+          modalClose();
+        }
+      });
     },
     [dispatch, modalClose, organizationId],
   );
@@ -63,9 +53,7 @@ export function Division() {
   return (
     <>
       <div className={s.alignment}>
-        <NavigationButton onClick={back}>
-          <IoArrowBackOutline /> Back
-        </NavigationButton>
+        <BackButton />
         <NavigationButton onClick={modalOpen}>
           <IoAddCircleSharp /> Add Division
         </NavigationButton>

@@ -5,7 +5,7 @@
 }
 
 .background {
-  background: rgb(209, 227, 233);
+  background: var(--color-lightBlue);
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -57,22 +57,22 @@
   height: 48px;
   min-height: 48px;
   border-radius: 5px;
-  background-color: #0085f9;
-  color: #ffffff;
+  background-color: var(--color-blue);
+  color: var(--color-white);
   font-weight: bold;
   border: none;
   &:hover {
-    background: rgb(53, 167, 110);
+    background: var(--color-lightGreen);
   }
   cursor: pointer;
 }
 
 .year {
   padding-top: 60px;
-  color: #6a757c;
+  color: var(--color-gray);
 }
 
 .error {
   padding-top: 5px;
-  color: #6a757c;
+  color: var(--color-gray);
 }

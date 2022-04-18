@@ -35,7 +35,7 @@ const divisionSlice = createSlice({
         );
         if (index !== -1) {
           // eslint-disable-next-line no-param-reassign
-          state.data[index].id_organization = action.payload.id_organization;
+          state.data[index].id_organization = action.payload.organizationId;
           // eslint-disable-next-line no-param-reassign
           state.data[index].name = action.payload.name;
           // eslint-disable-next-line no-param-reassign

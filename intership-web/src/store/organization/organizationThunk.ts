@@ -1,6 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+type OrganizationParams = {
+  name: string;
+  address: string;
+  INN: number;
+};
+
 export const getOrganization = createAsyncThunk('organization/getOrganizations', async () => {
   try {
     const response = await axios.get(`http://127.0.0.1:8080/organization`);
@@ -12,7 +18,7 @@ export const getOrganization = createAsyncThunk('organization/getOrganizations',
 
 export const addOrganization = createAsyncThunk(
   'organization/addOrganizations',
-  async ({ name, address, INN }: any, { rejectWithValue }) => {
+  async ({ name, address, INN }: OrganizationParams, { rejectWithValue }) => {
     try {
       const response = await axios.post(`http://127.0.0.1:8080/organization`, {
         name,
@@ -28,7 +34,7 @@ export const addOrganization = createAsyncThunk(
 
 export const deleteOrganization = createAsyncThunk(
   'organization/seleteOrganization',
-  async ({ organizationId }: any, { rejectWithValue }) => {
+  async ({ organizationId }: { organizationId: number }, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
         `http://127.0.0.1:8080/organization/?id=${organizationId}`,
@@ -42,7 +48,10 @@ export const deleteOrganization = createAsyncThunk(
 
 export const editOrganizations = createAsyncThunk(
   'organization/editOrganizations',
-  async ({ name, address, INN, organizationId }: any, { rejectWithValue }) => {
+  async (
+    { name, address, INN, organizationId }: OrganizationParams & { organizationId?: number },
+    { rejectWithValue },
+  ) => {
     try {
       const response = await axios.put(`http://127.0.0.1:8080/organization/?id=${organizationId}`, {
         name,

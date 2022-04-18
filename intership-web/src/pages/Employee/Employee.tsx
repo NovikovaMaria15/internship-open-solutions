@@ -1,27 +1,23 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { IoArrowBackOutline, IoAddCircleSharp } from 'react-icons/io5';
+import { useParams } from 'react-router-dom';
+import { IoAddCircleSharp } from 'react-icons/io5';
 import { Employee } from 'Src/models/type';
 import { useAppDispatch, RootState } from '../../store/store';
 import { getEmpoyee, addEmployee } from '../../store/employee/employeeThunk';
 import { EmployeeItems } from './EmployeeItems';
-import { ModalEmloyee } from '../Modal/ModalEmloyee';
+import { ModalEmloyee } from '../../components/Modal/ModalEmloyee';
 import { NavigationButton } from '../../UIElements/Buttons/index';
+import { BackButton } from '../../UIElements/Buttons/BackButton/BackButton';
 
 import s from './EmployeeStyles.module.scss';
 
 export function Employee() {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const employee = useSelector((state: RootState) => state.employee.data);
   const [open, setOpen] = useState(false);
-  const params = useParams();
-  const divisionId = params.id;
-
-  const back = useCallback(() => {
-    navigate(-1);
-  }, [navigate]);
+  const parameters = useParams();
+  const divisionId = parameters.id;
 
   const modalOpen = useCallback(() => {
     setOpen(true);
@@ -36,27 +32,21 @@ export function Employee() {
     dispatch(getEmpoyee({ divisionId }));
   }, [dispatch, divisionId]);
 
-  const addEmployees: ({ id_division, FIO, address, position }) => void = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-shadow
+  const addEmployees: ({ FIO, address, position }) => void = useCallback(
     (params) => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       dispatch(
         addEmployee({
-          id_division: divisionId,
+          divisionId,
           FIO: params.FIO,
           address: params.address,
           position: params.position,
         }),
-      )
-        .then((action) => {
-          if (action.payload) {
-            modalClose();
-          } else {
-            console.log('Неверные данные');
-          }
-        })
-        .catch(() => {
-          console.log('Неверные данные');
-        });
+      ).then((action) => {
+        if (action.payload) {
+          modalClose();
+        }
+      });
     },
     [dispatch, modalClose, divisionId],
   );
@@ -64,9 +54,7 @@ export function Employee() {
   return (
     <>
       <div className={s.alignment}>
-        <NavigationButton onClick={back}>
-          <IoArrowBackOutline /> Back
-        </NavigationButton>
+        <BackButton />
         <NavigationButton onClick={modalOpen}>
           <IoAddCircleSharp /> Add Employee
         </NavigationButton>

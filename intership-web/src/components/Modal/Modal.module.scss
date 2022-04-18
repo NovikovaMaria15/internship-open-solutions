@@ -1,0 +1,71 @@
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-grayWhite);
+}
+
+.line {
+  border-bottom: 1px solid var(--color-grayWhite);
+  width: 500px;
+  height: 2px;
+  margin-bottom: 16px;
+}
+
+.input {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  width: 454px;
+  height: 38px;
+  min-height: 38px;
+  padding-left: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--color-grayWhite);
+  :focus {
+    outline: 0;
+    outline-offset: 0;
+  }
+}
+
+.message {
+  margin-bottom: 17px;
+  color: var(--color-red);
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.paddingLeft {
+  padding-left: 16px;
+}
+
+.сancelAndAdd {
+  padding-left: 353px;
+  flex-direction: row;
+}
+
+.form {
+  padding: 10px;
+}
+
+.questionForm {
+  padding: 10px;
+  width: 500px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.yesAndNo {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}

@@ -35,8 +35,6 @@ const employeeSlice = createSlice({
         );
         if (index !== -1) {
           // eslint-disable-next-line no-param-reassign
-          state.data[index].id_division = action.payload.id_division;
-          // eslint-disable-next-line no-param-reassign
           state.data[index].FIO = action.payload.FIO;
           // eslint-disable-next-line no-param-reassign
           state.data[index].address = action.payload.address;
